@@ -38,6 +38,7 @@ public class ControladorRegistroCapitulo implements Serializable {
 	private String nombreAutor;
 	private String mensaje;
 	
+	
 	public ControladorRegistroCapitulo() {
 		
 	}
@@ -137,7 +138,7 @@ public class ControladorRegistroCapitulo implements Serializable {
 	
 	}
 	public void validarAutor() {
-		autor = fachadaAutor.buscar(nombreAutor);
+		autor = fachadaAutor.buscar(getNombreAutor());
 		
 		if(nombreAutor != null) {
 			mensaje = "Autor Asociado con exito";
@@ -159,7 +160,7 @@ public class ControladorRegistroCapitulo implements Serializable {
 		autor=null;
 		
 		nombreLibro = "";
-		nombreAutor="";
+		nombreAutor= "";
 		mensaje = "";
 		
 	}

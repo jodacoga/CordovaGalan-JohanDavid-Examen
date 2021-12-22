@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Listar:</title>
+</h:head>
+<h:body>
+	<a href="registrarLibros.xhtml">Registrar libros</a>
+	<br />
+	<h:form>
+		<label for="lista-capitulos"></label>
+		<h:inputText id="nombre-capitulo"
+			value="#{controladorListar.nombreCapitulo}" />
+		<h:commandButton value="Listar por nombre de capitulo"
+			actionListener="#{controladorListar.listarPorTituloCapitulo()}">
+			<f:ajax execute="nombre-capitulo" render="lista-capitulos" />
+		</h:commandButton>
+		<br />
+		<!-- 	<label for="lista-capitulos">Nombre de Capitulo:</label>
+		<h:inputText id="numero-tarjeta" value="#{controladorListar.nombreCapitulo}"/>
+		<h:commandButton value="Listar por Nombre de Capitulo" 
+			actionListener="#{controladorListarPedidos.listarPorNumeroTarjeta()}">
+			<f:ajax execute="numero-tarjeta" render="lista-pedidos"/> 
+		</h:commandButton><br/>-->
+		<h:dataTable id="lista-capitulo" value="#{controladorListar.libro}"
+			var="libro">
+			<h:column>
+				<f:facet name="header">ISBN</f:facet>
+				<h:outputLabel value="#{libro.ISBN}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">NOmbre Libro</f:facet>
+				<h:outputLabel value="#{libro.nombreLibro}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">NumPagina</f:facet>
+				<h:outputLabel value="#{libro.numpagina}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Titulo</f:facet>
+				<h:outputLabel value="#{capitulo.titulo}" />
+				<br />
+
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+
+</h:body>
+
+</html>
