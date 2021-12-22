@@ -1,8 +1,11 @@
 package ec.edu.ups.modelos;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +21,10 @@ public class Libro implements Serializable{
 	private String nombreLibro;
 	private String ISBN;
 	private String numpagina;
+	
+	@JoinColumn(name = "numeroLibro")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	List<Capitulo> listaCapitulos;
 	
 	public Libro() {
 		// TODO Auto-generated constructor stub
@@ -53,6 +60,14 @@ public class Libro implements Serializable{
 
 	public void setNumpagina(String numpagina) {
 		this.numpagina = numpagina;
+	}
+
+	public List<Capitulo> getListaCapitulos() {
+		return listaCapitulos;
+	}
+
+	public void setListaCapitulos(List<Capitulo> listaCapitulos) {
+		this.listaCapitulos = listaCapitulos;
 	}
 	
 	
