@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+<title>Registrar Libros</title>
+</h:head>
+
+<h:body>
+<h:form id="formulario-libros">
+<label for="nombre-libro">Nombre del libro:</label>
+<h:inputText id="nombre-libro" value="#ControladorRegistroLibro.libro.nombreLibro"> </h:inputText>
+<label for="ISBN">ISBN:</label>
+<h:inputText id="ISBN" value="#ControladorRegistroLibro.libro.ISBN"> </h:inputText>
+<label for="numero-pagina">Numero de paginas:</label>
+<h:inputText id="numero-pagina" value="#ControladorRegistroLibro.libro.numpagina"> </h:inputText>
+
+<label for="numero-capitulo">Numero del capitulo:</label>
+<h:inputText id="numero-capitulo" value="#ControladorRegistroLibro.capitulo.numeroCap"> </h:inputText>
+
+<label for="titulo-capitulo">Titulo del capitulo:</label>
+<h:inputText id="titulo-capitulo" value="#ControladorRegistroLibro.capitulo.titulo"> </h:inputText>
+</h:form>
+
+<h:commandButton value="Agregar" actionListener="#{controladorRegistroLibro.agregarCapitulo()}">
+			<f:ajax execute="titulo-capitulo numero-capitulo" 
+				render="tabla-capitulos numero-capitulo titulo-capitulo"/>
+		</h:commandButton><br/>
+		
+		<h:dataTable id="tabla-capitulos" value="#{controladorRegistroLibro.libro.listaCapitulos}" var="capitulo">
+			<h:column>
+				<f:facet name="header">Numero Paginas:</f:facet>
+				<h:outputLabel value="#{capitulo.numeroCap}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Titulo:</f:facet>
+				<h:outputLabel value="#{capitulo.titulo}"/>
+			</h:column>
+			<h:column>
+				<h:commandLink value="Quitar"
+					actionListener="#{controladorRegistroLibro.quitarCapitulo(capitulo)}"/>
+			</h:column>
+		</h:dataTable><br/><br/>
+		
+		<h:commandButton value="Realizar libro" actionListener="#{controladorRegistroLibro.realizarLibro()}"/>
+
+</h:body>
+
+</html>
