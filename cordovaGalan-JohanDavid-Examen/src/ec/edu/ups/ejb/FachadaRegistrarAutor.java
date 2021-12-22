@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import ec.edu.ups.modelos.Autor;
 
 @Stateless
-public class FachadaRegistrarAutor extends FachadaAbstracta<Autor, Integer> {
+public class FachadaRegistrarAutor extends FachadaAbstracta<Autor, String> {
 
 	@PersistenceContext(unitName = "jpa")
 	private EntityManager gestor;

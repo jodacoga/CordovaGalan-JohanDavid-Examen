@@ -22,7 +22,7 @@ import ec.edu.ups.modelos.Libro;
 @FacesConfig(version = Version.JSF_2_3)
 @Named
 @SessionScoped
-public class ControladorRegistroCapitulo implements Serializable {
+public class ControladorRegistroCapitulo{
 
 	@EJB
 	private FachadaCapitulo fachadaCapitulo;
@@ -35,7 +35,7 @@ public class ControladorRegistroCapitulo implements Serializable {
 	private Autor autor;
 	
 	private String nombreLibro;
-	private String nombreAutor;
+	private String nombreAutor="";
 	private String mensaje;
 	
 	
@@ -127,18 +127,13 @@ public class ControladorRegistroCapitulo implements Serializable {
 
 
 	public void agregarLibro() {
-
-	
 		if(capitulo != null) {
 			libro.getCapitulosList().add(capitulo);
 			capitulo = new Capitulo();
-	
 		}
-	
-	
 	}
 	public void validarAutor() {
-		autor = fachadaAutor.buscar(getNombreAutor());
+		autor = fachadaAutor.buscar(nombreAutor);
 		
 		if(nombreAutor != null) {
 			mensaje = "Autor Asociado con exito";
@@ -146,19 +141,16 @@ public class ControladorRegistroCapitulo implements Serializable {
 			mensaje = "No se ecuentra el Autor";
 		}
 	}
-	public void quitarLibro(Capitulo capitulo) {
-		
+	public void quitarLibro(Capitulo capitulo) {	
 		libro.getCapitulosList().remove(capitulo);
 	}
 	
-	public void realizarCapitulo() {
-		
+	public void realizarCapitulo() {	
 		capitulo.setAutor(autor);
 		fachadaCapitulo.crear(libro);
 		capitulo = new Capitulo();
 		libro = new Libro();
-		autor=null;
-		
+		autor=null;	
 		nombreLibro = "";
 		nombreAutor= "";
 		mensaje = "";
