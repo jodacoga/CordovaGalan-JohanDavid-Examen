@@ -1,26 +1,25 @@
 package ec.edu.ups.ejb;
 
-import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import ec.edu.ups.modelos.Autor;
 
-public class FachadaRegistrarAutor extends FachadaAbstracta<Autor, String>{
-	
-public FachadaRegistrarAutor() {
-		super(Autor.class);
-		// TODO Auto-generated constructor stub
-	}
+@Stateless
+public class FachadaRegistrarAutor extends FachadaAbstracta<Autor, String> {
 
-@PersistenceContext(unitName = "jpa")
+	@PersistenceContext(unitName = "jpa")
 	private EntityManager gestor;
+
+	public FachadaRegistrarAutor() {
+		super(Autor.class);
+
+	}
 
 	@Override
 	protected EntityManager getEntityManager() {
-		// TODO Auto-generated method stub
 		return gestor;
 	}
 
-	
 }

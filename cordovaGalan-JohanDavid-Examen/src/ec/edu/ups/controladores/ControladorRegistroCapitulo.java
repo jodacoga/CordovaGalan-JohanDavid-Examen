@@ -1,9 +1,11 @@
 package ec.edu.ups.controladores;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBs;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
@@ -17,7 +19,6 @@ import ec.edu.ups.modelos.Autor;
 import ec.edu.ups.modelos.Capitulo;
 import ec.edu.ups.modelos.Libro;
 
-
 @FacesConfig(version = Version.JSF_2_3)
 @Named
 @SessionScoped
@@ -26,7 +27,7 @@ public class ControladorRegistroCapitulo implements Serializable {
 	@EJB
 	private FachadaCapitulo fachadaCapitulo;
 	
-	@Ejb
+	@EJB
 	private FachadaRegistrarAutor fachadaAutor;
 
 	private Libro libro;
@@ -37,23 +38,38 @@ public class ControladorRegistroCapitulo implements Serializable {
 	private String nombreAutor;
 	private String mensaje;
 	
-	@PostConstruct
-	public void init() {
+	public ControladorRegistroCapitulo() {
 		
+	}
+	
+	@PostConstruct
+	public void init() {		
+		  if(fachadaAutor.listar().size()==0) {
+		  Autor autor1= new Autor();
+		  autor1.setNacionalidad("Chile");
+		  autor1.setNombreAutor("Pablo Neruda"); fachadaAutor.crear(autor1);
+		  
+		  Autor autor2= new Autor();
+		  autor2.setNacionalidad("Estados Unidos");
+		  autor2.setNombreAutor("Dan Brown"); fachadaAutor.crear(autor2);
+		  
+		  Autor autor3= new Autor();
+		  autor3.setNacionalidad("Brasil");
+		  autor3.setNombreAutor("Paulo Coelho"); fachadaAutor.crear(autor3);
+		  
+		  Autor autor4= new Autor();
+		  autor4.setNacionalidad("Gran Bretaña");
+		  autor4.setNombreAutor("JRR Talkie"); fachadaAutor.crear(autor4);
+		  
+		  }
+		 
 		libro= new Libro();
 		capitulo= new Capitulo();
+		
 	}
 
 	
-	public String getMensaje() {
-		return mensaje;
-	}
-
-
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
-	}
-
+	
 
 	public Libro getLibro() {
 		return libro;
@@ -98,36 +114,39 @@ public class ControladorRegistroCapitulo implements Serializable {
 	public void setNombreAutor(String nombreAutor) {
 		this.nombreAutor = nombreAutor;
 	}
+	public String getMensaje() {
+		return mensaje;
+	}
+
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+
 
 
 	public void agregarLibro() {
-//		if (libro != null) {
-//			capitulo.getListaLibro().add(libro);
-//			libro = new Libro();
-//		} 
+
 	
 		if(capitulo != null) {
-			//libro.getListaCapitulo().add(capitulo);
-			//capitulo = new Capitulo();
 			libro.getCapitulosList().add(capitulo);
-//			capitulo.getListaCapitulo().add(capitulo);
 			capitulo = new Capitulo();
-		
+	
 		}
 	
 	
 	}
 	public void validarAutor() {
 		autor = fachadaAutor.buscar(nombreAutor);
-		if(autor == null) {
-			mensaje = "No se ecuentra el Autor";
+		
+		if(nombreAutor != null) {
+			mensaje = "Autor Asociado con exito";
 		} else {
-			mensaje = "Autor Encontrado";
+			mensaje = "No se ecuentra el Autor";
 		}
 	}
 	public void quitarLibro(Capitulo capitulo) {
 		
-//		libro.getListaCapitulo().remove(capitulo);
 		libro.getCapitulosList().remove(capitulo);
 	}
 	

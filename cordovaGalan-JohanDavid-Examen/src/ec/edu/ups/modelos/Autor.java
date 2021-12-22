@@ -3,18 +3,21 @@ package ec.edu.ups.modelos;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Autor implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigoAutor;
 	private String nombreAutor;
 	private String nacionalidad;
 	
 	public Autor() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public int getCodigoAutor() {

@@ -6,10 +6,10 @@
 
 <h:head>
 <title>Registrar Libros</title>
-<a href="registrarAutor.xhtml">Registrar autores</a><br/> 
 </h:head>
 
 <h:body>
+<a href="listarL.xhtml">Ir a lista de pedidos</a><br/> 
 <h:form id="formulario-libros">
 <label for="nombre-libro">Nombre del libro:</label>
 <h:inputText id="nombre-libro" value="#{controladorRegistroCapitulo.libro.nombreLibro}"> </h:inputText><br/>
@@ -41,10 +41,15 @@
 			</h:column>
 			<h:column>
 				<h:commandLink value="Quitar"
-					actionListener="#{controladorRegistroLibro.quitarLibro(capitulo)}"/>
+					actionListener="#{controladorRegistroCapitulo.quitarLibro(capitulo)}"/>
 			</h:column>
 		</h:dataTable><br/><br/>
-		
+		<label for="nombre-autor">Nombre Autor: </label>
+		<h:inputText id="nombre-autor" value="#{controladorRegistroCapitulo.nombreAutor}"/>
+		<h:commandButton value="Asociar Autor" actionListener="#{controladorRegistroCapitulo.validarAutor()}">
+			<f:ajax execute="nombre-autor" render="mensaje"/>
+		</h:commandButton><br/>
+		<h:outputLabel id="mensaje" value="#{controladorRegistroCapitulo.mensaje}"/><br/><br/>
 		<h:commandButton value="Realizar libro" actionListener="#{controladorRegistroCapitulo.realizarCapitulo()}"/>
 </h:form>
 </h:body>
